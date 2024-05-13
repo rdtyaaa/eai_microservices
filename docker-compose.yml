@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: uts_eai
+    ports:
+      - "3310:3310"
+
+  rabbitmq:
+    image: rabbitmq:latest
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+      - rabbitmq
+    links:
+      - mysql
+      - rabbitmq
