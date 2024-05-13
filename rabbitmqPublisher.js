@@ -1,5 +1,3 @@
-// rabbitmqPublisher.js
-
 const amqp = require("amqplib");
 
 async function publishMessage(message) {
@@ -17,11 +15,6 @@ async function publishMessage(message) {
     channel.sendToQueue(queue, Buffer.from(message));
     console.log(" [x] Sent %s", message);
 
-    // setTimeout(function () {
-    //   channel.close();
-    //   connection.close();
-    //   process.exit(0);
-    // }, 500);
   } catch (error) {
     console.error("Error connecting to RabbitMQ:", error);
   }
